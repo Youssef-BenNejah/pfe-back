@@ -5,15 +5,15 @@ const {ObjectId} = mongoose.Schema;
 
 const invoiceSchema =  new mongoose.Schema(
     {
-    Num_fact: String,
-    Date_fact: Date,
-    Date_paie: Date,
+    Num_fact: {type:String,unique: true},
+    Date_fact: String,
+    Date_paie: String,
     Type_paie: String,
     Etat_paie :String,
-    postedBy: {
-        type: ObjectId,
-        ref: "user"
-    },
+    // postedBy: {
+    //     type: ObjectId,
+    //     ref: "user"
+    // },
     // invoices:[{type:mongoose.Schema.Types.ObjectId,ref:'user'}],
 
 

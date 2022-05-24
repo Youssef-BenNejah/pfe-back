@@ -16,15 +16,15 @@ export const  getInvoices = async(request,response) =>{
 
 export const  addInvoices = async (request,response) =>{
     const invoice = request.body;
-    // invoice.postedBy=request.user._id;
     const newInvoice= new Invoice (invoice);
-    // console.log(request.user._id);
 
     try{
          await newInvoice.save();
         response.status(201).json(newInvoice);
+        console.log("facture ajouté")
     } catch (error){
-        response.status(409).json({ message: error.message});     
+        response.status(409).json({ message: error.message});   
+        console.log("echec d'ajout de la facture")  
     }
 
 }
@@ -44,6 +44,7 @@ export const editInvoice = async (request, response) => {
 
     const editInvoice = new Invoice(invoice);
     try{
+       
         await Invoice.updateOne({_id: request.params.id}, editInvoice);
         response.status(201).json(editInvoice);
     } catch (error){

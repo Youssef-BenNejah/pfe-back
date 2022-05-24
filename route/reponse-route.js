@@ -1,5 +1,5 @@
 import express from 'express';
-import { getReponses, addReponses, getReponseById, editReponse, deleteReponse,addMail } from '../controller/reponse-controller';
+import { getReponses, addReponses, getReponseById, editReponse, deleteReponse,addMail } from '../controller/reponse-controller.js';
 
 
 const route_reponse= express.Router();

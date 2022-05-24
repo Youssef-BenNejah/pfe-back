@@ -3,7 +3,7 @@ import autoIncrement from 'mongoose-auto-increment';
 
 
 const reponseSchema = mongoose.Schema({
-    email: String,
+    email: { type: String, required: true, unique: true },
     reponse: String,
 },
 

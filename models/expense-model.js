@@ -4,7 +4,7 @@ import autoIncrement from 'mongoose-auto-increment';
 
 const expenseSchema = mongoose.Schema({
     Categorie: String,
-    Date_paie: Date,
+    Date_paie: String,
     Etat_paie: String,
     Prix: Number
 },

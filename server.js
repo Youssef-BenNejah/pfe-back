@@ -9,11 +9,10 @@ const bcrypt = require('bcryptjs')
 import route_article from './route/article-route.js'
 import route_contact from './route/contact-route.js'
 import route_expense from './route/expense-route.js'
-import route_message from './route/message-route.js'
+import routemessage from './route/message-route.js'
 import route_reponse from './route/reponse-route.js'
 import routes from './route/user-route.js'
 import route from './route/route.js';
-import route_supplier from './route/supplier-route.js'
 
 app.use(express.json())
 require("dotenv").config();
@@ -203,15 +202,10 @@ app.post('/api/new-password',(req,res)=>{
 app.use('/invoices', route);
 app.use('/articles', route_article);
 app.use('/expenses', route_expense);
-app.use('/suppliers', route_supplier);
 app.use('/contacts', route_contact);
-app.use('/messages', route_message);
+app.use('/messages', routemessage);
 app.use('/reponses', route_reponse);
 app.use('/users',    routes);
-
-
-
-
 
 
 

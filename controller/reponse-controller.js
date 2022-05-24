@@ -36,8 +36,10 @@ export const addReponses = async (request, response) => {
     try {
         await newReponse.save();
         response.status(201).json(newReponse);
+        console.log('Email envoyé')
     } catch (error) {
         response.status(409).json({ message: error.message });
+        console.log("Echec de l'envoie de l'email ")
     }
 }
 
@@ -46,62 +48,27 @@ export const addMail = async (request, response) => {
     const newReponse = new Reponse(reponse);
     try {
         await newReponse.save();
-        var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-		var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
-		sendSmtpEmail = {
-		  sender: { email: "facter.projet@gmail.com" },
-		  to: [
-			{
-			  email: request.body.email,
-			  reponse: request.body.reponse,
-			},
-		  ],
-		  subject: "Promotion",
-		  textContent: "<h1>-10%</h1>",
-		};
-		apiInstance.sendTransacEmail(sendSmtpEmail).then(
-		  function () {
-			console.log("API called successfully");
-		  },
-		  function (error) {
-			console.error(error);
-		  }
-		);
-        response.status(201).json(newReponse);
-        
+    
+        var mailOptions = {
+                    from: 'Facter <facter.projet@gmail.com>',
+                    to: request.body.email,
+                    subject: 'Promotion',
+                    html:request.body.reponse
+                }
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error)
+                    }
+                    else {
+                        console.log("Email sent")
+                    }
+                })
         
 
     } catch (error) {
-        // response.status(409).json({ message: error.message });
         console.log(error)
     }
 }
-
-
-
-
-// try{
-//      await newReponse.save();
-//     response.status(201).json(newReponse);
-//     var mailOptions = {
-//         from: 'Facter <facter.projet@gmail.com>',
-//         to: request.body.email,
-//         subject: 'Reponse',
-//         html:request.body.reponse
-//     }
-//     transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-//             console.log(error)
-//         }
-//         else {
-//             console.log("Email sent")
-//         }
-//     })
-// } catch (error){
-//     console.log(error);     
-// }
-
-
 
 export const getReponseById = async (request, response) => {
     try {

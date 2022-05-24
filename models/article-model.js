@@ -6,7 +6,7 @@ const articleSchema = mongoose.Schema({
     Prix_Unitaire_HT: Number,
     Description: String,
     Quantite: Number,
-    Total_HT: Number
+    Total_HT: Number,
 },
 
 
